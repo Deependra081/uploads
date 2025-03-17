@@ -40,6 +40,7 @@
             width: 50px;
             height: auto;
             cursor: grab;
+            touch-action: none;
         }
         .download-link {
             display: none;
@@ -58,10 +59,10 @@
 </head>
 <body>
     <div class="file-container">
-        <img src="https://deependra.in/wp-content/uploads/2025/01/cat-2.png" alt="Cat" class="cat" id="cat">
+        <img src="cat.png" alt="Cat" class="cat" id="cat">
         <a href="file.zip" class="download-link" id="download" download>Download File</a>
     </div>
-    <img src="https://png.pngtree.com/png-clipart/20201208/ourmid/pngtree-cute-gray-rat-clipart-png-image_2531996.jpg" alt="Mouse" class="mouse" id="mouse">
+    <img src="mouse.png" alt="Mouse" class="mouse" id="mouse">
 
     <script>
         let mouse = document.getElementById('mouse');
@@ -70,20 +71,23 @@
         let isDragging = false;
         let offsetX, offsetY;
 
-        mouse.addEventListener('mousedown', (e) => {
+        function startDrag(e) {
             isDragging = true;
-            offsetX = e.clientX - mouse.getBoundingClientRect().left;
-            offsetY = e.clientY - mouse.getBoundingClientRect().top;
-        });
+            let touch = e.touches ? e.touches[0] : e;
+            offsetX = touch.clientX - mouse.getBoundingClientRect().left;
+            offsetY = touch.clientY - mouse.getBoundingClientRect().top;
+            e.preventDefault();
+        }
 
-        document.addEventListener('mousemove', (e) => {
+        function onDrag(e) {
             if (isDragging) {
-                mouse.style.left = e.clientX - offsetX + 'px';
-                mouse.style.top = e.clientY - offsetY + 'px';
+                let touch = e.touches ? e.touches[0] : e;
+                mouse.style.left = touch.clientX - offsetX + 'px';
+                mouse.style.top = touch.clientY - offsetY + 'px';
             }
-        });
+        }
 
-        document.addEventListener('mouseup', () => {
+        function endDrag() {
             isDragging = false;
             let mouseRect = mouse.getBoundingClientRect();
             let catRect = cat.getBoundingClientRect();
@@ -96,6 +100,19 @@
             ) {
                 downloadLink.style.display = 'block';
             }
+        }
+
+        mouse.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('mouseup', endDrag);
+        
+        mouse.addEventListener('touchstart', startDrag);
+        document.addEventListener('touchmove', onDrag);
+        document.addEventListener('touchend', endDrag);
+        
+        mouse.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            startDrag(e);
         });
     </script>
 </body>
