@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern 3D Stylish Website</title>
+    <meta name="theme-color" content="#1e1e2f"> <!-- Chrome tab color -->
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5c, #1e1e2f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 1rem;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .image-card {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            perspective: 1000px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .image-card:hover {
+            transform: scale(1.1) rotateY(15deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal .download-btn {
+            position: absolute;
+            bottom: 10%;
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .modal .download-btn:hover {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            transform: scale(1.1);
+        }
+
+        .modal .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 2rem;
+            border-radius: 10px;
+        }
+
+        /* Emoji Animation */
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>Modern 3D Stylish Website</header>
+    <div class="container">
+        <div class="image-card">
+            <img src="Screenshot 2025-02-16 122048.png" alt="Sample Image">
+        </div>
+        <div class="image-card">
+            <img src="" alt="Sample Image">
+        </div>
+        <div class="image-card">
+            <img src="https://via.placeholder.com/300x200" alt="Sample Image">
+        </div>
+    </div>
+    <footer>&copy; 2023 Stylish Website</footer>
+
+    <div class="modal" id="imageModal">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <img id="modalImage" src="" alt="Modal Image">
+        <a id="downloadLink" class="download-btn" href="" download>
+            <i class="fas fa-download"></i> Download
+        </a>
+    </div>
+
+    <!-- Dynamic Emojis -->
+    <script>
+        const emojis = ['😍', '😊', '🥳', '🎶', '💃', '🕺', '🌸', '🎈']; // Updated emojis
+        const body = document.body;
+    
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = Math.random() * 100 + 'vh';
+            emoji.style.animationDuration = Math.random() * 3 + 2 + 's';
+            body.appendChild(emoji);
+    
+            setTimeout(() => {
+                emoji.remove();
+            }, 5000);
+        }
+    
+        setInterval(createEmoji, 500);
+    
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const downloadLink = document.getElementById('downloadLink');
+        const closeModal = document.getElementById('closeModal');
+    
+        document.querySelectorAll('.image-card img').forEach(img => {
+            img.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImage.src = img.src;
+                downloadLink.href = img.src;
+            });
+        });
+    
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+    
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>
