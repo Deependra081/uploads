@@ -156,7 +156,7 @@
     </style>
 </head>
 <body>
-    <header>Modern 3D Stylish Website</header>
+    <header>I am Alien</header>
     <div class="container">
         <div><h2>Specific heat</h2>
         <div class="image-card">
@@ -177,7 +177,6 @@
             <img src="Screenshot 2025-02-16 132827.png" alt="Sample Image">
         </div>
     </div>
-
     <div><h2>MB & FD statistics</h2>
         <div class="image-card">
             <img src="Screenshot 2025-02-23 154022.png" alt="Sample Image">
@@ -186,9 +185,29 @@
         <div class="image-card">
             <img src="Screenshot 2025-02-16 133655.png" alt="Sample Image">
         </div>
+        <div><h2>Probability</h2>
+            <div class="image-card">
+                <img src="Screenshot 2025-03-17 055718.png" alt="Sample Image">
+            </div>
+            <br>
+            <div class="image-card">
+                <img src="Screenshot 2025-03-17 055643.png" alt="Sample Image">
+            </div>
 
+            <div><h2>Partition Function</h2>
+                <div class="image-card">
+                    <img src="Screenshot 2025-03-17 055721.png" alt="Sample Image">
+                </div>
+                <br>
+                <div class="image-card">
+                    <img src="Screenshot 2025-03-24 053819.png" alt="Sample Image">
+                </div>
+                <br>
+                <div class="image-card">
+                    <img src="Screenshot 2025-03-24 053934.png" alt="Sample Image">
+                </div>
     </div>
-    <footer>&copy; 2023 Stylish Website</footer>
+    <footer>&copy; 2025 All right reserved</footer>
 
     <div class="modal" id="imageModal">
         <span class="close-btn" id="closeModal">&times;</span>
@@ -197,27 +216,7 @@
             <i class="fas fa-download"></i> Download
         </a>
     </div>
-
-    <!-- Dynamic Emojis -->
     <script>
-        const emojis = ['😍', '😊', '🥳', '🎶', '💃', '🕺', '🌸', '🎈']; // Updated emojis
-        const body = document.body;
-    
-        function createEmoji() {
-            const emoji = document.createElement('div');
-            emoji.classList.add('emoji');
-            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + 'vw';
-            emoji.style.top = Math.random() * 100 + 'vh';
-            emoji.style.animationDuration = Math.random() * 3 + 2 + 's';
-            body.appendChild(emoji);
-    
-            setTimeout(() => {
-                emoji.remove();
-            }, 5000);
-        }
-    
-        setInterval(createEmoji, 500);
     
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
